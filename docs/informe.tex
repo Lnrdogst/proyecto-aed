@@ -1,0 +1,44 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{array}
+\usepackage{enumitem}
+
+\setlength{\parindent}{0pt}
+\setlist[itemize]{leftmargin=1.2em,itemsep=0.2em}
+
+\title{Informe Técnico: Hoja de Cálculo con Matriz Dispersa}
+\author{Leonardo Gabriel Sanchez Terrazos\\202410273}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section*{Justificación de la Estructura de Datos}
+La aplicación modela la hoja de cálculo como una matriz dispersa con listas enlazadas cruzadas. Esta representación evita almacenar celdas vacías y permite recorrer solo los elementos realmente presentes. En este esquema, insertar o eliminar un nodo tiene costo $O(k)$, donde $k$ es la cantidad de elementos de la fila o columna involucrada, lo que resulta más eficiente que recorrer una matriz densa completa cuando la mayoría de celdas están vacías.
+
+\section*{Análisis de Complejidad}
+La siguiente estructura queda preparada para documentar las complejidades temporales y espaciales de las 13 operaciones del sistema.
+
+\vspace{0.5em}
+\begin{tabular}{|>{\raggedright\arraybackslash}p{0.56\linewidth}|>{\centering\arraybackslash}p{0.18\linewidth}|>{\centering\arraybackslash}p{0.18\linewidth}|}
+\hline
+\textbf{Operación} & \textbf{Tiempo} & \textbf{Espacio} \\ \hline
+Inserción de celda & --- & --- \\ \hline
+Eliminación de celda & --- & --- \\ \hline
+Actualización de celda & --- & --- \\ \hline
+Búsqueda de celda & --- & --- \\ \hline
+Recorrido de fila & --- & --- \\ \hline
+Recorrido de columna & --- & --- \\ \hline
+Creación de matriz & --- & --- \\ \hline
+Limpieza de matriz & --- & --- \\ \hline
+Carga de archivo & --- & --- \\ \hline
+Guardado de archivo & --- & --- \\ \hline
+Visualización de hoja & --- & --- \\ \hline
+Redimensionamiento lógico & --- & --- \\ \hline
+Validaci\'on de coordenadas & --- & --- \\ \hline
+\end{tabular}
+
+\end{document}
