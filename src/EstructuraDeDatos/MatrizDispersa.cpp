@@ -1,13 +1,8 @@
-/*
-Archivo: MatrizDispersa.cpp
-Responsabilidad: implementar la matriz dispersa con enlaces cruzados, usando std::string como tipo de dato.
-Relación: usa Nodo.h y expone la lógica que consumen GUI y Core.
-*/
-#include "MatrizDispersa.h"
+
+#include "EstructuraDeDatos/MatrizDispersa.h"
 #include <iostream>
 #include <stdexcept>
 #include <string>
-
 // valida que el string sea un número
 bool MatrizDispersa::esNumero(const std::string& s) {
     if (s.empty()) {
@@ -190,4 +185,107 @@ void MatrizDispersa::eliminar(int fila, int columna) {
     }
 
     delete actualFila;
+}
+
+// lista todas las celdas ocupadas (no vacías) con sus coordenadas y valores
+std::vector<CeldaInfo> MatrizDispersa::listarOcupadas() const {
+    std::vector<CeldaInfo> resultado;
+    
+    // recorre cada fila
+    for (int f = 0; f < filas; ++f) {
+        Nodo* actual = cabezasFila[f];
+        // recorre cada nodo en la fila
+        while (actual != nullptr) {
+            resultado.push_back({actual->fila, actual->columna, actual->valor});
+            actual = actual->siguienteColumna;
+        }
+    }
+    
+    return resultado;
+}
+
+// obtiene todas las celdas ocupadas de una fila específica
+std::vector<CeldaInfo> MatrizDispersa::obtenerFila(int fila) const {
+    if (fila < 0 || fila >= filas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+    
+    std::vector<CeldaInfo> resultado;
+    
+    // recorre los nodos ocupados de esa fila
+    Nodo* actual = cabezasFila[fila];
+    while (actual != nullptr) {
+        resultado.push_back({actual->fila, actual->columna, actual->valor});
+        actual = actual->siguienteColumna;
+    }
+    
+    return resultado;
+}
+
+// obtiene todas las celdas ocupadas de una columna específica
+std::vector<CeldaInfo> MatrizDispersa::obtenerColumna(int columna) const {
+    if (columna < 0 || columna >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+    
+    std::vector<CeldaInfo> resultado;
+    
+    // recorre los nodos ocupados de esa columna
+    Nodo* actual = cabezasColumna[columna];
+    while (actual != nullptr) {
+        resultado.push_back({actual->fila, actual->columna, actual->valor});
+        actual = actual->siguienteFila;
+    }
+    
+    return resultado;
+}
+
+// obtiene todas las celdas ocupadas dentro de un rango rectangular [f1,c1] a [f2,c2]
+std::vector<CeldaInfo> MatrizDispersa::obtenerRango(int f1, int c1, int f2, int c2) const {
+    if (f1 < 0 || f1 >= filas || f2 < 0 || f2 >= filas ||
+        c1 < 0 || c1 >= columnas || c2 < 0 || c2 >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+    
+    // asegurar f1 <= f2 y c1 <= c2
+    int fMin;
+    int fMax;
+    int cMin;
+    int cMax;
+
+    if (f1 < f2) {
+        fMin = f1;
+        fMax = f2;
+    } else {
+        fMin = f2;
+        fMax = f1;
+    }
+
+    if (c1 < c2) {
+        cMin = c1;
+        cMax = c2;
+    } else {
+        cMin = c2;
+        cMax = c1;
+    }
+    
+    std::vector<CeldaInfo> resultado;
+    
+    // recorre solo las filas dentro del rango
+    for (int f = fMin; f <= fMax; ++f) {
+        Nodo* actual = cabezasFila[f];
+        // recorre los nodos de esa fila y filtra por columna
+        while (actual != nullptr) {
+            if (actual->columna >= cMin && actual->columna <= cMax) {
+                resultado.push_back({actual->fila, actual->columna, actual->valor});
+            }
+            // si columna ya es mayor que cMax, no hay más nodos relevantes
+            if (actual->columna > cMax) {
+                break;
+            }
+            actual = actual->siguienteColumna;
+        }
+    }
+    
+    return resultado;
 }

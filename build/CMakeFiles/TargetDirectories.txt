@@ -1,0 +1,3 @@
+/home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/HojaCalculoAED.dir
+/home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/edit_cache.dir
+/home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/rebuild_cache.dir

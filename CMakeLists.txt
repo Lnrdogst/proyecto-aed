@@ -16,10 +16,10 @@ target_include_directories(HojaCalculoAED PRIVATE
     "${CMAKE_SOURCE_DIR}/include"
 )
 
-find_package(SFML 2.5 COMPONENTS system window graphics REQUIRED)
+find_package(SFML 3 COMPONENTS Window Graphics System REQUIRED)
 
 target_link_libraries(HojaCalculoAED PRIVATE
-    sfml-system
-    sfml-window
-    sfml-graphics
+    SFML::Window
+    SFML::Graphics
+    SFML::System
 )

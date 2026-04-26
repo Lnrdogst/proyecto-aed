@@ -10,6 +10,13 @@ Relación: depende de Nodo.h y alimenta a GUI/VentanaPrincipal.h y Core/Aplicaci
 #ifndef MATRIZDISPERSA_H
 #define MATRIZDISPERSA_H
 
+// estructura para representar una celda ocupada con sus coordenadas y valor
+struct CeldaInfo {
+    int fila;
+    int columna;
+    std::string valor;
+};
+
 class MatrizDispersa {
 private:
     int filas;
@@ -30,6 +37,14 @@ public:
     std::string obtener(int fila, int columna) const;
     void eliminar(int fila, int columna);
     
+    
+    // operaciones de visualización
+    std::vector<CeldaInfo> listarOcupadas() const;
+    std::vector<CeldaInfo> obtenerFila(int fila) const;
+    std::vector<CeldaInfo> obtenerColumna(int columna) const;
+    std::vector<CeldaInfo> obtenerRango(int f1, int c1, int f2, int c2) const;
+    
+
     int getFilas() const { return filas; }
     int getColumnas() const { return columnas; }
 };
