@@ -46,6 +46,12 @@ public:
     std::vector<CeldaInfo> obtenerFila(int fila) const;
     std::vector<CeldaInfo> obtenerColumna(int columna) const;
     std::vector<CeldaInfo> obtenerRango(int f1, int c1, int f2, int c2) const;
+
+    // operaciones matemáticas por rango
+    double sumarRango(int f1, int c1, int f2, int c2) const;
+    double promediarRango(int f1, int c1, int f2, int c2) const;
+    double maximoRango(int f1, int c1, int f2, int c2) const;
+    double minimoRango(int f1, int c1, int f2, int c2) const;
     
 
     int getFilas() const { return filas; }

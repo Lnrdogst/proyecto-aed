@@ -1,6 +1,7 @@
 
 #include "EstructuraDeDatos/MatrizDispersa.h"
 #include <iostream>
+#include <limits>
 #include <stdexcept>
 #include <string>
 // valida que el string sea un número
@@ -392,7 +393,7 @@ std::vector<CeldaInfo> MatrizDispersa::obtenerRango(int f1, int c1, int f2, int 
         throw std::out_of_range("Índices fuera de rango");
     }
     
-    // asegurar f1 <= f2 y c1 <= c2
+    // asegura que f1 <= f2 y c1 <= c2
     int fMin;
     int fMax;
     int cMin;
@@ -425,7 +426,7 @@ std::vector<CeldaInfo> MatrizDispersa::obtenerRango(int f1, int c1, int f2, int 
             if (actual->columna >= cMin && actual->columna <= cMax) {
                 resultado.push_back({actual->fila, actual->columna, actual->valor});
             }
-            // si columna ya es mayor que cMax, no hay más nodos relevantes
+            // si columna ya es mayor que cMax no hay más nodos que importen
             if (actual->columna > cMax) {
                 break;
             }
@@ -434,4 +435,220 @@ std::vector<CeldaInfo> MatrizDispersa::obtenerRango(int f1, int c1, int f2, int 
     }
     
     return resultado;
+}
+
+// suma valores numéricos dentro de un rango rectangular [f1,c1] a [f2,c2]
+double MatrizDispersa::sumarRango(int f1, int c1, int f2, int c2) const {
+    if (f1 < 0 || f1 >= filas || f2 < 0 || f2 >= filas ||
+        c1 < 0 || c1 >= columnas || c2 < 0 || c2 >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+    //
+    int fMin;
+    int fMax;
+    int cMin;
+    int cMax;
+
+    if (f1 < f2) {
+        fMin = f1;
+        fMax = f2;
+    } else {
+        fMin = f2;
+        fMax = f1;
+    }
+
+    if (c1 < c2) {
+        cMin = c1;
+        cMax = c2;
+    } else {
+        cMin = c2;
+        cMax = c1;
+    }
+
+    double suma = 0.0;
+
+    for (int f = fMin; f <= fMax; ++f) {
+        Nodo* cabezaFila = cabezasFila[f];
+        Nodo* actual = cabezaFila->siguienteColumna;
+
+        while (actual != cabezaFila) {
+            if (actual->columna >= cMin && actual->columna <= cMax && esNumero(actual->valor)) {
+                suma += comoNumero(actual->valor);
+            }
+            if (actual->columna > cMax) {
+                break;
+            }
+            actual = actual->siguienteColumna;
+        }
+    }
+
+    return suma;
+}
+
+// promedia valores numéricos dentro de un rango rectangular [f1,c1] a [f2,c2]
+double MatrizDispersa::promediarRango(int f1, int c1, int f2, int c2) const {
+    if (f1 < 0 || f1 >= filas || f2 < 0 || f2 >= filas ||
+        c1 < 0 || c1 >= columnas || c2 < 0 || c2 >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+
+    int fMin;
+    int fMax;
+    int cMin;
+    int cMax;
+
+    if (f1 < f2) {
+        fMin = f1;
+        fMax = f2;
+    } else {
+        fMin = f2;
+        fMax = f1;
+    }
+
+    if (c1 < c2) {
+        cMin = c1;
+        cMax = c2;
+    } else {
+        cMin = c2;
+        cMax = c1;
+    }
+
+    double suma = 0.0;
+    int cantidad = 0;
+
+    for (int f = fMin; f <= fMax; ++f) {
+        Nodo* cabezaFila = cabezasFila[f];
+        Nodo* actual = cabezaFila->siguienteColumna;
+
+        while (actual != cabezaFila) {
+            if (actual->columna >= cMin && actual->columna <= cMax && esNumero(actual->valor)) {
+                suma += comoNumero(actual->valor);
+                cantidad++;
+            }
+            if (actual->columna > cMax) {
+                break;
+            }
+            actual = actual->siguienteColumna;
+        }
+    }
+
+    if (cantidad == 0) {
+        return 0.0;
+    }
+
+    return suma / cantidad;
+}
+
+// obtiene el valor máximo numérico dentro de un rango rectangular [f1,c1] a [f2,c2]
+double MatrizDispersa::maximoRango(int f1, int c1, int f2, int c2) const {
+    if (f1 < 0 || f1 >= filas || f2 < 0 || f2 >= filas ||
+        c1 < 0 || c1 >= columnas || c2 < 0 || c2 >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+
+    int fMin;
+    int fMax;
+    int cMin;
+    int cMax;
+
+    if (f1 < f2) {
+        fMin = f1;
+        fMax = f2;
+    } else {
+        fMin = f2;
+        fMax = f1;
+    }
+
+    if (c1 < c2) {
+        cMin = c1;
+        cMax = c2;
+    } else {
+        cMin = c2;
+        cMax = c1;
+    }
+
+    double maximo = std::numeric_limits<double>::lowest();
+    bool hayNumero = false;
+
+    for (int f = fMin; f <= fMax; ++f) {
+        Nodo* cabezaFila = cabezasFila[f];
+        Nodo* actual = cabezaFila->siguienteColumna;
+
+        while (actual != cabezaFila) {
+            if (actual->columna >= cMin && actual->columna <= cMax && esNumero(actual->valor)) {
+                double valor = comoNumero(actual->valor);
+                if (valor > maximo) {
+                    maximo = valor;
+                }
+                hayNumero = true;
+            }
+            if (actual->columna > cMax) {
+                break;
+            }
+            actual = actual->siguienteColumna;
+        }
+    }
+
+    if (!hayNumero) {
+        return 0.0;
+    }
+
+    return maximo;
+}
+
+// obtiene el valor mínimo numérico dentro de un rango rectangular [f1,c1] a [f2,c2]
+double MatrizDispersa::minimoRango(int f1, int c1, int f2, int c2) const {
+    if (f1 < 0 || f1 >= filas || f2 < 0 || f2 >= filas ||
+        c1 < 0 || c1 >= columnas || c2 < 0 || c2 >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+
+    int fMin;
+    int fMax;
+    int cMin;
+    int cMax;
+
+    if (f1 < f2) {
+        fMin = f1;
+        fMax = f2;
+    } else {
+        fMin = f2;
+        fMax = f1;
+    }
+
+    if (c1 < c2) {
+        cMin = c1;
+        cMax = c2;
+    } else {
+        cMin = c2;
+        cMax = c1;
+    }
+    //inicializa con un numero muy pequeño con limits
+    double minimo = std::numeric_limits<double>::max();
+    bool hayNumero = false;
+
+    for (int f = fMin; f <= fMax; ++f) {
+        Nodo* cabezaFila = cabezasFila[f];
+        Nodo* actual = cabezaFila->siguienteColumna;
+
+        while (actual != cabezaFila) {
+            if (actual->columna >= cMin && actual->columna <= cMax && esNumero(actual->valor)) {
+                double valor = comoNumero(actual->valor);
+                if (valor < minimo) {
+                    minimo = valor;
+                }
+                hayNumero = true;
+            }
+            if (actual->columna > cMax) {
+                break;
+            }
+            actual = actual->siguienteColumna;
+        }
+    }
+
+    if (!hayNumero) {
+        return 0.0;
+    }
+
+    return minimo;
 }
