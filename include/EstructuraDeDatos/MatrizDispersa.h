@@ -6,26 +6,32 @@ Relación: depende de Nodo.h y alimenta a GUI/VentanaPrincipal.h y Core/Aplicaci
 #include "Nodo.h"
 #include <stdexcept>
 #include <vector>
+#include <string>
 #ifndef MATRIZDISPERSA_H
 #define MATRIZDISPERSA_H
-template <typename T>
+
 class MatrizDispersa {
 private:
     int filas;
     int columnas;
-    std::vector<Nodo<T>*> cabezasFila;
-    std::vector<Nodo<T>*> cabezasColumna;
+    std::vector<Nodo*> cabezasFila;
+    std::vector<Nodo*> cabezasColumna;
+    
+    // Funciones helper privadas para validar tipo de dato
+    static bool esNumero(const std::string& s);
+    static double comoNumero(const std::string& s);
+    
 public:
     MatrizDispersa(int filas, int columnas);
     ~MatrizDispersa();
-    //metodos a implementar en el cpp
-    void insertar(T valor, int fila, int columna);
+    
+    void insertar(const std::string& valor, int fila, int columna);
     bool existe(int fila, int columna) const;
-    T obtener(int fila, int columna) const;
+    std::string obtener(int fila, int columna) const;
     void eliminar(int fila, int columna);
-    //getters
+    
     int getFilas() const { return filas; }
     int getColumnas() const { return columnas; }
 };
 
-#endif 
+#endif

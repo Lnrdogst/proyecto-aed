@@ -1,50 +1,72 @@
 /*
 Archivo: MatrizDispersa.cpp
-Responsabilidad: implementar la matriz dispersa con enlaces cruzados.
+Responsabilidad: implementar la matriz dispersa con enlaces cruzados, usando std::string como tipo de dato.
 Relación: usa Nodo.h y expone la lógica que consumen GUI y Core.
 */
 #include "MatrizDispersa.h"
 #include <iostream>
+#include <stdexcept>
+#include <string>
 
-template <typename T>
-MatrizDispersa<T>::MatrizDispersa(int filas, int columnas) :
+// valida que el string sea un número
+bool MatrizDispersa::esNumero(const std::string& s) {
+    if (s.empty()) {
+        return false;
+    }
+    try {
+        std::stod(s);
+        return true;
+    } catch (...) {
+        return false;
+    }
+}
+
+// convierte string a número retorna 0.0 si no es número
+double MatrizDispersa::comoNumero(const std::string& s) {
+    if (esNumero(s)) {
+        return std::stod(s);
+    }
+    return 0.0;
+}
+
+MatrizDispersa::MatrizDispersa(int filas, int columnas) :
     filas(filas), columnas(columnas), cabezasFila(filas, nullptr),
-     cabezasColumna(columnas, nullptr) {}
+    cabezasColumna(columnas, nullptr) {}
 
-template <typename T>
-MatrizDispersa<T>::~MatrizDispersa() {
+MatrizDispersa::~MatrizDispersa() {
     // limpia filas y columnas eliminando cada nodo.
     for (int f = 0; f < filas; ++f) {
-        Nodo<T>* actual = cabezasFila[f];
+        Nodo* actual = cabezasFila[f];
         while (actual != nullptr) {
-            Nodo<T>* siguiente = actual->siguienteColumna;
+            Nodo* siguiente = actual->siguienteColumna;
             delete actual;
             actual = siguiente;
         }
     }
 }
 
-template <typename T>
-void MatrizDispersa<T>::insertar(T valor, int fila, int columna){
-    // Evita error de indices fuera de rango.
+
+void MatrizDispersa::insertar(const std::string& valor, int fila, int columna) {
     if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
-        //manejo de errores con out_of_range 
+        //manejo de errores con out_of_range
         throw std::out_of_range("Índices fuera de rango");
     }
+    
     // insertar en la lista de la fila 
-    Nodo<T>* anteriorFila = nullptr;
-    Nodo<T>* actualFila = cabezasFila[fila];
+    Nodo* anteriorFila = nullptr;
+    Nodo* actualFila = cabezasFila[fila];
     while (actualFila != nullptr && actualFila->columna < columna) {
         anteriorFila = actualFila;
         actualFila = actualFila->siguienteColumna;
     }
+    
     // verifica que exista la celda exacta para actualizar su valor
     if (actualFila != nullptr && actualFila->columna == columna) {
         actualFila->valor = valor;
         return;
     }
 
-    Nodo<T>* nuevoNodo = new Nodo<T>(valor, fila, columna);
+    Nodo* nuevoNodo = new Nodo(valor, fila, columna);
     // insersion del nodo en la lista
     // asegura que exista anterior para enlazar
     //si no existe, el nuevo nodo se convierte en la cabeza de la fila 
@@ -60,10 +82,9 @@ void MatrizDispersa<T>::insertar(T valor, int fila, int columna){
         anteriorFila->siguienteColumna = nuevoNodo;
     }
 
-    
     // Insertar en la lista de la columna (orden por fila).
-    Nodo<T>* anteriorColumna = nullptr;
-    Nodo<T>* actualColumna = cabezasColumna[columna];
+    Nodo* anteriorColumna = nullptr;
+    Nodo* actualColumna = cabezasColumna[columna];
     while (actualColumna != nullptr && actualColumna->fila < fila) {
         anteriorColumna = actualColumna;
         actualColumna = actualColumna->siguienteFila;
@@ -83,60 +104,60 @@ void MatrizDispersa<T>::insertar(T valor, int fila, int columna){
     }
 }
 
-// template para verificar la existencia de un nodo en una posición específica,
+
+// verifica la existencia de un nodo en una posición específica,
 // devuelve true si existe y false si no existe
-template <typename T>
-bool MatrizDispersa<T>::existe(int fila, int columna) const {
+bool MatrizDispersa::existe(int fila, int columna) const {
     //verifica que los indices esten dentro del rango
     if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
         throw std::out_of_range("Índices fuera de rango");
     }
-//recorre la fila buscando la columna deseada
-    Nodo<T>* actual = cabezasFila[fila];
+
+    //recorre la fila buscando la columna deseada
+    Nodo* actual = cabezasFila[fila];
     while (actual != nullptr && actual->columna < columna) {
         actual = actual->siguienteColumna;
     }
-    //si encontro la columna, devuelve true
+
     if (actual != nullptr && actual->columna == columna) {
         return true;
     }
-    //si no se encuentra el nodo false
+
     return false;
 }
 
-
-// template para obtener el valor de una celda específica, devuelve el valor en 
-//cualquier tipo de dato 
-
-template <typename T>
-T MatrizDispersa<T>::obtener(int fila, int columna) const {
+// obtiene el valor de una celda específica, devuelve el valor en std::string
+// o cadena vacía si no se encuentra
+std::string MatrizDispersa::obtener(int fila, int columna) const {
     if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
         //manejo de errores con out_of_range 
         throw std::out_of_range("Índices fuera de rango");
     }
+
     //recorre la fila buscando la columna deseada
-    Nodo<T>* actual = cabezasFila[fila];
+    Nodo* actual = cabezasFila[fila];
     while (actual != nullptr && actual->columna < columna) {
         actual = actual->siguienteColumna;
     }
+
     // si encontro la columna, devuelve su valor
     if (actual != nullptr && actual->columna == columna) {
         return actual->valor;
     }
-    //devuelve el valor por defecto del tipo T si no se encuentra el nodo (cero lógico)
-    return T{};
+
+    //devuelve cadena vacía si no se encuentra el nodo
+    return "";
 }
 
-template <typename T>
-void MatrizDispersa<T>::eliminar(int fila, int columna) {
+void MatrizDispersa::eliminar(int fila, int columna) {
     if (fila < 0 || fila >= filas || columna < 0 || columna >= columnas) {
         //manejo de errores con out_of_range
         throw std::out_of_range("Índices fuera de rango");
     }
 
     // quita de la lista de fila.
-    Nodo<T>* anteriorFila = nullptr;
-    Nodo<T>* actualFila = cabezasFila[fila];
+    Nodo* anteriorFila = nullptr;
+    Nodo* actualFila = cabezasFila[fila];
     while (actualFila != nullptr && actualFila->columna < columna) {
         anteriorFila = actualFila;
         actualFila = actualFila->siguienteColumna;
@@ -152,10 +173,9 @@ void MatrizDispersa<T>::eliminar(int fila, int columna) {
         anteriorFila->siguienteColumna = actualFila->siguienteColumna;
     }
 
-
     // quita de la lista de columna.
-    Nodo<T>* anteriorColumna = nullptr;
-    Nodo<T>* actualColumna = cabezasColumna[columna];
+    Nodo* anteriorColumna = nullptr;
+    Nodo* actualColumna = cabezasColumna[columna];
     while (actualColumna != nullptr && actualColumna != actualFila) {
         anteriorColumna = actualColumna;
         actualColumna = actualColumna->siguienteFila;
