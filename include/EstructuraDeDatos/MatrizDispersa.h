@@ -36,6 +36,9 @@ public:
     bool existe(int fila, int columna) const;
     std::string obtener(int fila, int columna) const;
     void eliminar(int fila, int columna);
+    void eliminarFila(int fila);
+    void eliminarColumna(int columna);
+    void eliminarRango(int f1, int c1, int f2, int c2);
     
     
     // operaciones de visualización

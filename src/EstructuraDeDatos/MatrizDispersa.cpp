@@ -187,6 +187,159 @@ void MatrizDispersa::eliminar(int fila, int columna) {
     delete actualFila;
 }
 
+// elimina todos los nodos de una fila y actualiza las columnas afectadas
+void MatrizDispersa::eliminarFila(int fila) {
+    //manejo de errores con out_of_range
+    if (fila < 0 || fila >= filas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+    // nodo que se va quitar
+    Nodo* actual = cabezasFila[fila];
+    //recorre la lista de fila
+    while (actual != nullptr) {
+        //guarda el siguiente nodo antes de eliminar el actual
+        Nodo* siguiente = actual->siguienteColumna;
+        // columna del nodo actual para actualizar la lista de esa columna
+        int columna = actual->columna;
+
+        // quitar de la lista de la columna correspondiente
+        Nodo* anteriorColumna = nullptr;
+        Nodo* actualColumna = cabezasColumna[columna];
+        // recorre la columna buscando el nodo a eliminar
+        while (actualColumna != nullptr && actualColumna != actual) {
+            // guarda el nodo anterior para actualizar su enlace después de eliminar el nodo actual
+            anteriorColumna = actualColumna;
+            actualColumna = actualColumna->siguienteFila;
+        }
+
+        if (actualColumna != nullptr) {
+            // si era caveza de la columna, actualiza la cabeza al siguiente nodo
+            if (anteriorColumna == nullptr) {
+
+                cabezasColumna[columna] = actualColumna->siguienteFila;
+            } 
+            // si no era cabeza el puntero del nodo anterior se actualiza para saltar el nodo actual
+            else {
+                anteriorColumna->siguienteFila = actualColumna->siguienteFila;
+            }
+        }
+        //se elimina el nodo actual
+        delete actual;
+        actual = siguiente;
+    }
+
+    cabezasFila[fila] = nullptr;
+}
+
+// elimina todos los nodos de una columna y actualiza las filas 
+//logica similar a elminiarfila pero recorre columna y actualiza filas 
+void MatrizDispersa::eliminarColumna(int columna) {
+
+    if (columna < 0 || columna >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+
+    Nodo* actual = cabezasColumna[columna];
+    while (actual != nullptr) {
+        Nodo* siguiente = actual->siguienteFila;
+        int fila = actual->fila;
+
+        // quitar de la lista de la fila correspondiente
+        Nodo* anteriorFila = nullptr;
+        Nodo* actualFila = cabezasFila[fila];
+        while (actualFila != nullptr && actualFila != actual) {
+            anteriorFila = actualFila;
+            actualFila = actualFila->siguienteColumna;
+        }
+
+        if (actualFila != nullptr) {
+            // si era cabeza de la fila se actualiza la cabeza al siguiente
+            if (anteriorFila == nullptr) {
+                cabezasFila[fila] = actualFila->siguienteColumna;
+            } else {
+                anteriorFila->siguienteColumna = actualFila->siguienteColumna;
+            }
+        }
+
+        delete actual;
+        actual = siguiente;
+    }
+
+    cabezasColumna[columna] = nullptr;
+}
+
+// elimina todas las celdas dentro de un rango rectangular [f1,c1] a [f2,c2]
+void MatrizDispersa::eliminarRango(int f1, int c1, int f2, int c2) {
+    //verificar rango de los indicese 
+    if (f1 < 0 || f1 >= filas || f2 < 0 || f2 >= filas ||
+        c1 < 0 || c1 >= columnas || c2 < 0 || c2 >= columnas) {
+        throw std::out_of_range("Índices fuera de rango");
+    }
+
+    // establece f1 <= f2 y c1 <= c2
+
+    int fMin;
+    int fMax;
+    int cMin;
+    int cMax;
+
+    if (f1 < f2) {
+        fMin = f1;
+        fMax = f2;
+    } else {
+        fMin = f2;
+        fMax = f1;
+    }
+
+    if (c1 < c2) {
+        cMin = c1;
+        cMax = c2;
+    } else {
+        cMin = c2;
+        cMax = c1;
+    }
+
+    // recorre filas del rango y elimina nodos con columna dentro del rango
+    for (int f = fMin; f <= fMax; ++f) {
+        Nodo* anteriorFila = nullptr;
+        Nodo* actualFila = cabezasFila[f];
+
+        while (actualFila != nullptr && actualFila->columna < cMin) {
+            anteriorFila = actualFila;
+            actualFila = actualFila->siguienteColumna;
+        }
+
+        while (actualFila != nullptr && actualFila->columna <= cMax) {
+            Nodo* nodoAEliminar = actualFila;
+            actualFila = actualFila->siguienteColumna;
+
+            if (anteriorFila == nullptr) {
+                cabezasFila[f] = actualFila;
+            } else {
+                anteriorFila->siguienteColumna = actualFila;
+            }
+
+            int columna = nodoAEliminar->columna;
+            Nodo* anteriorColumna = nullptr;
+            Nodo* actualColumna = cabezasColumna[columna];
+            while (actualColumna != nullptr && actualColumna != nodoAEliminar) {
+                anteriorColumna = actualColumna;
+                actualColumna = actualColumna->siguienteFila;
+            }
+
+            if (actualColumna != nullptr) {
+                if (anteriorColumna == nullptr) {
+                    cabezasColumna[columna] = actualColumna->siguienteFila;
+                } else {
+                    anteriorColumna->siguienteFila = actualColumna->siguienteFila;
+                }
+            }
+
+            delete nodoAEliminar;
+        }
+    }
+}
+
 // lista todas las celdas ocupadas (no vacías) con sus coordenadas y valores
 std::vector<CeldaInfo> MatrizDispersa::listarOcupadas() const {
     std::vector<CeldaInfo> resultado;
