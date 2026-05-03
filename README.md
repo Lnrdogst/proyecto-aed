@@ -57,5 +57,3 @@ Si tu equipo prefiere usar CMake, el proyecto también está configurado para el
 - `include/EstructuraDeDatos` y `src/EstructuraDeDatos`: Implementación pura de la Matriz Dispersa y el Nodo base. (Lógica 100% aislada e independiente de la UI).
 - `include/GUI` y `src/GUI`: Lógica de la interfaz gráfica (`VentanaPrincipal`) construida sobre la clase `QTableWidget`.
 
-## Documentación Adicional
-Puedes encontrar la explicación a profundidad de la estructura de la matriz y el análisis algorítmico de tiempo (Big O) de todos sus métodos en el archivo de texto `Documentacion_MatrizDispersa.txt` generado para auditoría.
