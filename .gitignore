@@ -1,0 +1,13 @@
+# Documentos generados
+Documentacion_MatrizDispersa.txt
+Documentacion_UI_Qt.txt
+
+# Carpetas de compilación
+build/
+build_qt/
+bin/
+
+# Archivos de configuración locales de Qt/C++
+*.pro.user
+.qmake.stash
+Makefile

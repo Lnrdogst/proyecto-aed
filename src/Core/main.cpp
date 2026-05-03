@@ -1,9 +1,11 @@
-/*
-Archivo: main.cpp
-Responsabilidad: punto de entrada del programa.
-Relación: debe crear o invocar Core/Aplicacion cuando exista la implementación.
-*/
+#include <QApplication>
+#include "Core/Aplicacion.h"
 
-int main() {
-    return 0;
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
+
+    Aplicacion aplicacion;
+    aplicacion.iniciar();
+
+    return app.exec();
 }
