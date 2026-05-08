@@ -1,7 +1,7 @@
 CMakeFiles/HojaCalculoAED.dir/src/EstructuraDeDatos/Nodo.cpp.o: \
- /home/leonardo/Cursos/26-1/AED/proyecto-26/src/EstructuraDeDatos/Nodo.cpp \
+ /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/src/EstructuraDeDatos/Nodo.cpp \
  /usr/include/stdc-predef.h \
- /home/leonardo/Cursos/26-1/AED/proyecto-26/include/EstructuraDeDatos/Nodo.h \
+ /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/include/EstructuraDeDatos/Nodo.h \
  /usr/include/c++/15.2.1/string \
  /usr/include/c++/15.2.1/bits/requires_hosted.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \

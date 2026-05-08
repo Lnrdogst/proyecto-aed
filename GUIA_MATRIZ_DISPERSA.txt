@@ -1,0 +1,9 @@
+GUIA_MATRIZ_DISPERSA.txt (REDIRECCION)
+=====================================
+
+Esta guia ya NO contiene la explicacion de la matriz.
+Se reemplazo por una guia enfocada a la interfaz grafica (GUI) de Qt.
+
+Usa esta nueva guia:
+- `GUIA_GUI_VentanaPrincipal.txt`
+

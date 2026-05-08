@@ -48,19 +48,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/sbin/cmake
+CMAKE_COMMAND = /usr/bin/cmake
 
 # The command to remove a file.
-RM = /usr/sbin/cmake -E rm -f
+RM = /usr/bin/cmake -E rm -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/leonardo/Cursos/26-1/AED/proyecto-26
+CMAKE_SOURCE_DIR = /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/leonardo/Cursos/26-1/AED/proyecto-26/build
+CMAKE_BINARY_DIR = /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -68,7 +68,7 @@ CMAKE_BINARY_DIR = /home/leonardo/Cursos/26-1/AED/proyecto-26/build
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake cache editor..."
-	/usr/sbin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/ccmake -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -78,7 +78,7 @@ edit_cache/fast: edit_cache
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --cyan "Running CMake to regenerate build system..."
-	/usr/sbin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles /home/leonardo/Cursos/26-1/AED/proyecto-26/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -113,7 +113,7 @@ preinstall/fast:
 
 # clear depends
 depend:
-	$(CMAKE_COMMAND) -P /home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 1
 .PHONY : depend
 
@@ -129,6 +129,56 @@ HojaCalculoAED: cmake_check_build_system
 HojaCalculoAED/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/HojaCalculoAED.dir/build.make CMakeFiles/HojaCalculoAED.dir/build
 .PHONY : HojaCalculoAED/fast
+
+#=============================================================================
+# Target rules for targets named HojaCalculoAED_autogen_timestamp_deps
+
+# Build rule for target.
+HojaCalculoAED_autogen_timestamp_deps: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 HojaCalculoAED_autogen_timestamp_deps
+.PHONY : HojaCalculoAED_autogen_timestamp_deps
+
+# fast build rule for target.
+HojaCalculoAED_autogen_timestamp_deps/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HojaCalculoAED_autogen_timestamp_deps.dir/build.make CMakeFiles/HojaCalculoAED_autogen_timestamp_deps.dir/build
+.PHONY : HojaCalculoAED_autogen_timestamp_deps/fast
+
+#=============================================================================
+# Target rules for targets named HojaCalculoAED_autogen
+
+# Build rule for target.
+HojaCalculoAED_autogen: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 HojaCalculoAED_autogen
+.PHONY : HojaCalculoAED_autogen
+
+# fast build rule for target.
+HojaCalculoAED_autogen/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HojaCalculoAED_autogen.dir/build.make CMakeFiles/HojaCalculoAED_autogen.dir/build
+.PHONY : HojaCalculoAED_autogen/fast
+
+HojaCalculoAED_autogen/mocs_compilation.o: HojaCalculoAED_autogen/mocs_compilation.cpp.o
+.PHONY : HojaCalculoAED_autogen/mocs_compilation.o
+
+# target to build an object file
+HojaCalculoAED_autogen/mocs_compilation.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HojaCalculoAED.dir/build.make CMakeFiles/HojaCalculoAED.dir/HojaCalculoAED_autogen/mocs_compilation.cpp.o
+.PHONY : HojaCalculoAED_autogen/mocs_compilation.cpp.o
+
+HojaCalculoAED_autogen/mocs_compilation.i: HojaCalculoAED_autogen/mocs_compilation.cpp.i
+.PHONY : HojaCalculoAED_autogen/mocs_compilation.i
+
+# target to preprocess a source file
+HojaCalculoAED_autogen/mocs_compilation.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HojaCalculoAED.dir/build.make CMakeFiles/HojaCalculoAED.dir/HojaCalculoAED_autogen/mocs_compilation.cpp.i
+.PHONY : HojaCalculoAED_autogen/mocs_compilation.cpp.i
+
+HojaCalculoAED_autogen/mocs_compilation.s: HojaCalculoAED_autogen/mocs_compilation.cpp.s
+.PHONY : HojaCalculoAED_autogen/mocs_compilation.s
+
+# target to generate assembly for a file
+HojaCalculoAED_autogen/mocs_compilation.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/HojaCalculoAED.dir/build.make CMakeFiles/HojaCalculoAED.dir/HojaCalculoAED_autogen/mocs_compilation.cpp.s
+.PHONY : HojaCalculoAED_autogen/mocs_compilation.cpp.s
 
 src/Core/Aplicacion.o: src/Core/Aplicacion.cpp.o
 .PHONY : src/Core/Aplicacion.o
@@ -258,7 +308,12 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... HojaCalculoAED_autogen"
+	@echo "... HojaCalculoAED_autogen_timestamp_deps"
 	@echo "... HojaCalculoAED"
+	@echo "... HojaCalculoAED_autogen/mocs_compilation.o"
+	@echo "... HojaCalculoAED_autogen/mocs_compilation.i"
+	@echo "... HojaCalculoAED_autogen/mocs_compilation.s"
 	@echo "... src/Core/Aplicacion.o"
 	@echo "... src/Core/Aplicacion.i"
 	@echo "... src/Core/Aplicacion.s"
@@ -285,7 +340,7 @@ help:
 # No rule that depends on this can have commands that come from listfiles
 # because they might be regenerated.
 cmake_check_build_system:
-	$(CMAKE_COMMAND) -P /home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/VerifyGlobs.cmake
+	$(CMAKE_COMMAND) -P /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/VerifyGlobs.cmake
 	$(CMAKE_COMMAND) -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR) --check-build-system CMakeFiles/Makefile.cmake 0
 .PHONY : cmake_check_build_system
 

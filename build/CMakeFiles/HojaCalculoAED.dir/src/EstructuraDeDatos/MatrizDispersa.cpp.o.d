@@ -1,8 +1,8 @@
 CMakeFiles/HojaCalculoAED.dir/src/EstructuraDeDatos/MatrizDispersa.cpp.o: \
- /home/leonardo/Cursos/26-1/AED/proyecto-26/src/EstructuraDeDatos/MatrizDispersa.cpp \
+ /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/src/EstructuraDeDatos/MatrizDispersa.cpp \
  /usr/include/stdc-predef.h \
- /home/leonardo/Cursos/26-1/AED/proyecto-26/include/EstructuraDeDatos/MatrizDispersa.h \
- /home/leonardo/Cursos/26-1/AED/proyecto-26/include/EstructuraDeDatos/Nodo.h \
+ /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/include/EstructuraDeDatos/MatrizDispersa.h \
+ /home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/include/EstructuraDeDatos/Nodo.h \
  /usr/include/c++/15.2.1/string \
  /usr/include/c++/15.2.1/bits/requires_hosted.h \
  /usr/include/c++/15.2.1/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -152,4 +152,4 @@ CMakeFiles/HojaCalculoAED.dir/src/EstructuraDeDatos/MatrizDispersa.cpp.o: \
  /usr/include/c++/15.2.1/bits/locale_facets.tcc \
  /usr/include/c++/15.2.1/bits/basic_ios.tcc \
  /usr/include/c++/15.2.1/bits/ostream.tcc /usr/include/c++/15.2.1/istream \
- /usr/include/c++/15.2.1/bits/istream.tcc
+ /usr/include/c++/15.2.1/bits/istream.tcc /usr/include/c++/15.2.1/limits

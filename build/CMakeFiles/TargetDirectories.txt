@@ -1,3 +1,5 @@
-/home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/HojaCalculoAED.dir
-/home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/edit_cache.dir
-/home/leonardo/Cursos/26-1/AED/proyecto-26/build/CMakeFiles/rebuild_cache.dir
+/home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/HojaCalculoAED.dir
+/home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/edit_cache.dir
+/home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/rebuild_cache.dir
+/home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/HojaCalculoAED_autogen_timestamp_deps.dir
+/home/eddd_06/Escritorio/2026-1/AED/Proyectos_AED/proyecto-aed/build/CMakeFiles/HojaCalculoAED_autogen.dir

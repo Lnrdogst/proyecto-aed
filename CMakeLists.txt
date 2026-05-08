@@ -26,3 +26,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 target_link_libraries(HojaCalculoAED PRIVATE
     Qt${QT_VERSION_MAJOR}::Widgets
 )
+
+target_sources(HojaCalculoAED PRIVATE
+    include/GUI/VentanaPrincipal.h
+    include/Core/Aplicacion.h
+)
