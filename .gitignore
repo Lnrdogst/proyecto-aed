@@ -1,13 +1,29 @@
-# Documentos generados
-Documentacion_MatrizDispersa.txt
-Documentacion_UI_Qt.txt
-
-# Carpetas de compilación
+# ── Carpetas de compilación ──────────────────────────────────
 build/
 build_qt/
 bin/
 
-# Archivos de configuración locales de Qt/C++
+# ── Binarios y objetos compilados ────────────────────────────
+*.o
+*.a
+*.so
+*.out
+HojaCalculoAED
+
+# ── Archivos de proyecto Qt/CMake locales ────────────────────
 *.pro.user
 .qmake.stash
 Makefile
+CMakeCache.txt
+cmake_install.cmake
+CMakeFiles/
+
+# ── Documentos generados / entregas ─────────────────────────
+Documentacion_MatrizDispersa.txt
+Documentacion_UI_Qt.txt
+informe_latex.txt
+*.pdf
+
+# ── Otros ────────────────────────────────────────────────────
+.DS_Store
+*.swp
